@@ -90,7 +90,9 @@ exports.signupPostController = async (req, res, next) => {
                             },
                             { new: true },
                         );
-                        res.json({ user: updatedUser });
+                        console.log({user:updatedUser})
+                        const token = jwt.sign({user:updatedUser},process.env.ACCESS_TOKEN_SECRET,{ expiresIn: "168h" })
+                        res.json({ user: updatedUser,token:token});
                     }
                 }
             }

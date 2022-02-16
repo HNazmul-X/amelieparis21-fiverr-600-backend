@@ -8,6 +8,7 @@ const {
     updateTemplateProfilePic,
     getSingleTemplateByUserId,
     getSingleProfileTemplateByUsername,
+    deleteProfileTemplate,
 } = require("../Controller/profileTemplateController");
 
 const { isAuthenticated } = require("../Middleware/isAuthenticated");
@@ -33,6 +34,7 @@ profileTemplateRouter.post("/update-img/cover/:templateId", isAuthenticated, pro
 profileTemplateRouter.post("/update-img/profile/:templateId", isAuthenticated, profileTemplateUpload.single("profilePic"), updateTemplateProfilePic);
 profileTemplateRouter.get("/get-single-profile-by-userId/:userId", getSingleTemplateByUserId);
 profileTemplateRouter.get("/get-single-profile-by-username/:username", getSingleProfileTemplateByUsername);
+profileTemplateRouter.post("/delete-profile-template",isAuthenticated,deleteProfileTemplate)
 
 module.exports = profileTemplateRouter;
 

@@ -141,10 +141,13 @@ exports.getSingleTemplateByUserId = async (req, res, next) => {
     try {
         const { userId } = req.params;
         console.log(userId);
-        const TemplateData = await UserModel.findById(userId).select("isApproved username email profileTemplate").populate({
-            path: "profileTemplate",
-            select: "",
-        }).populate("profile","firstname lastname phone");
+        const TemplateData = await UserModel.findById(userId)
+            .select("isApproved username email profileTemplate")
+            .populate({
+                path: "profileTemplate",
+                select: "",
+            })
+            .populate("profile", "firstname lastname phone");
         console.log(TemplateData);
         if (TemplateData) {
             res.json(TemplateData);
@@ -167,6 +170,27 @@ exports.getSingleProfileTemplateByUsername = async (req, res, next) => {
             })
             .populate("profile", "firstname lastname phone");
         res.json(templateData);
+    } catch (e) {
+        next(e);
+    }
+};
+
+/// Deleting profile Template
+exports.deleteProfileTemplate = async (req, res, next) => {
+    try {
+        const { templateId, userId } = req.body;
+
+        console.log(templateId, userId);
+        if(!userId || !templateId) return res.json({error:"Please Send template Id and userid at Request body"})
+
+        const f_user = await UserModel.findById(userId)
+        if(!userId) return res.json({error:"User Data not Found"})
+
+        
+
+
+
+
     } catch (e) {
         next(e);
     }
