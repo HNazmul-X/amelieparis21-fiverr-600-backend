@@ -180,17 +180,18 @@ exports.deleteProfileTemplate = async (req, res, next) => {
     try {
         const { templateId, userId } = req.body;
 
-        console.log(templateId, userId);
-        if(!userId || !templateId) return res.json({error:"Please Send template Id and userid at Request body"})
+        if (!userId || !templateId) return res.json({ error: "Please Send template Id and userid at Request body" });
 
-        const f_user = await UserModel.findById(userId)
-        if(!userId) return res.json({error:"User Data not Found"})
+        const f_user = await UserModel.findById(userId);
+        if (!userId) return res.json({ error: "User Data not Found" });
 
-        
-
-
-
-
+        await ProfileTemplateModel.findByIdAndDelete(templateId);
+        await UserModel.findByIdAndUpdate(userId, {
+            $unset: {
+                profileTemplate: 1,
+            },
+        });
+        res.json({ success: true });
     } catch (e) {
         next(e);
     }
