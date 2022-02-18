@@ -9,6 +9,7 @@ const {
     resetPwdCodeSending,
     isVerificationSessionExist,
     userPwdChange,
+    verifySignupData,
 } = require("../Controller/UserAuthController");
 const loginValidator = require("../validator/loginValidator");
 
@@ -17,6 +18,7 @@ const authRouter = require("express").Router();
 authRouter.post("/login", [loginValidator], loginPostController);
 
 authRouter.post("/signup", signupValidator, signupPostController);
+authRouter.post("/validate-signup-data",signupValidator,verifySignupData)
 
 authRouter.post("/verify-token", verifyTokenPostController);
 

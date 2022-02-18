@@ -5,6 +5,7 @@ const profileRouter = require("./profileRouter");
 const profileTemplateRouter = require("./ProfileTemplateRouter");
 const uploadRouter = require("./uploadRouter");
 const userRouter = require("./userRouter");
+const utilRouter = require("./utilRouter");
 
 const routes = [
     {
@@ -34,6 +35,10 @@ const routes = [
     {
         path: "/api/profile",
         handler: profileRouter,
+    },
+    {
+        path: "/api/util",
+        handler: utilRouter,
     },
 ];
 

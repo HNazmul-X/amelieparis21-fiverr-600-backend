@@ -56,8 +56,9 @@ exports.loginPostController = async (req, res, next) => {
  * ================================================================
  */
 exports.signupPostController = async (req, res, next) => {
-    const isError = validationResult(req).formatWith((e) => e.msg);
     const { username, email, password, firstname, lastname, address, additional_address, phone, society, postalCode, ambassador_code, city } = req.body;
+    const isError = validationResult(req).formatWith(e => e.msg)
+
 
     if (isError.isEmpty()) {
         try {
@@ -90,9 +91,9 @@ exports.signupPostController = async (req, res, next) => {
                             },
                             { new: true },
                         );
-                        console.log({user:updatedUser})
-                        const token = jwt.sign({user:updatedUser},process.env.ACCESS_TOKEN_SECRET,{ expiresIn: "168h" })
-                        res.json({ user: updatedUser,token:token});
+                        console.log({ user: updatedUser });
+                        const token = jwt.sign({ user: updatedUser }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "168h" });
+                        res.json({ user: updatedUser, token: token });
                     }
                 }
             }
@@ -105,6 +106,20 @@ exports.signupPostController = async (req, res, next) => {
             ...isError.mapped(),
             error: "Please filled Up all requirement",
         });
+    }
+};
+
+/**================================================================
+ * =================  V E R I F Y   S I G N U P     ===============
+ * ================================================================
+ */
+exports.verifySignupData = async (req, res, next) => {
+    try {
+        const isError = validationResult(req).formatWith((e) => e.msg);
+        if (!isError.isEmpty()) res.json({ error: Object.values(isError.formatWith((e) => e.msg).mapped()) });
+        else res.send(true);
+    } catch (e) {
+        next(e);
     }
 };
 
