@@ -55,8 +55,7 @@ exports.sendContactFormDataToMail = async (req, res, next) => {
         };
 
         const sentEmail = await SendEmail.sendEmail(mailOption);
-        console.log(sentEmail);
-        res.json(sentEmail);
+        res.send(sentEmail.accepted?.length > 0);
     } catch (e) {
         next(e);
     }
