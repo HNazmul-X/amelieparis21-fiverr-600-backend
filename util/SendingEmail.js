@@ -68,7 +68,7 @@ class SendEmail {
 				text-align: center;
 				padding: 20px;
 				">
-			<img style="width: 100px;" src="https://i.ibb.co/2jFCjXt/Asset-1-2x.png" alt="">
+			<img style="width: 100px;display:block;margin:auto" src="https://i.ibb.co/8KTHvnn/Asset-1-2x-ccexpress.png" alt="">
 		</div>
 		<div style="text-align: center; margin-top: 20px">
 			<img src="https://i.ibb.co/rf9VFSK/Group-2.png" style="width: 200px; margin-bottom: 20px;" alt="" />
@@ -105,10 +105,9 @@ class SendEmail {
 	</div>`;
             const verification_template = `<div style="margin:0 auto;max-width:800px;padding:0;background-color:#f7faff">
 		<div style="background-color:#f7faff;padding-bottom:30px;font-family:Verdana,Geneva,Tahoma,sans-serif">
-			<div style="background-color:#132d63;display:flex;padding:10px 0 15px;flex-direction: column;align-content: center;align-items: center;">
-				<div>
-					<img style="width: 100px;" src="https://i.ibb.co/2jFCjXt/Asset-1-2x.png" alt="">
-				</div>
+			<div style="background-color:#132d63;padding:10px 0 15px; width:100%;text-align:center">
+            <img style="width: 100px;display:block;margin:auto" src="https://i.ibb.co/8KTHvnn/Asset-1-2x-ccexpress.png" alt=""> 
+				
 			</div>
 			<div style="text-align:center;margin-top:40px;margin-bottom:40px">
 				<img src="https://i.ibb.co/TYrg2vR/Frame.png" style="width:200px;height:200px;margin-bottom:20px" alt="" class="CToWUd a6T" tabindex="0">

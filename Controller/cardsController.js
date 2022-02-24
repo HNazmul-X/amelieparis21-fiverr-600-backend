@@ -138,3 +138,13 @@ exports.getSingleCardData = async (req, res, next) => {
         next(e);
     }
 };
+
+exports.getCardDeliveryData = async (req, res, next) => {
+    try {
+        const { cardId } = req.params;
+        const data = await DeliverInfoModel.findOne({ card: cardId});
+        res.json(data);
+    } catch (e) {
+        next(e);
+    }
+};
