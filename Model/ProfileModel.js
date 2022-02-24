@@ -50,7 +50,7 @@ const profileSchema = new Schema(
                 ref: "Cards",
             },
         ],
-        ambassador_code: {
+        country: {
             type: String,
             trim: true,
         },

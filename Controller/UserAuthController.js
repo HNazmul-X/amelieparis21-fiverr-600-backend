@@ -56,7 +56,7 @@ exports.loginPostController = async (req, res, next) => {
  * ================================================================
  */
 exports.signupPostController = async (req, res, next) => {
-    const { username, email, password, firstname, lastname, address, additional_address, phone, society, postalCode, ambassador_code, city } = req.body;
+    const { username, email, password, firstname, lastname, address, additional_address, phone, society, postalCode, country, city } = req.body;
     const isError = validationResult(req).formatWith(e => e.msg)
 
 
@@ -76,7 +76,7 @@ exports.signupPostController = async (req, res, next) => {
                         phone,
                         society,
                         postalCode,
-                        ambassador_code,
+                        country,
                         city,
                         user: createdUser._id,
                     }).save();
@@ -206,7 +206,6 @@ exports.verifyEmailCode = async (req, res, next) => {
     try {
         const isCodeMatched = await SendEmail.verifyCode(code, id);
         if (isCodeMatched && isCodeMatched !== "session expired") {
-            await VerificationModel.findOneAndDelete({ _id: id });
             res.json({ success: "Verification Successfully", res: true });
         } else {
             res.json({ error: "Cannot Verify the user" });

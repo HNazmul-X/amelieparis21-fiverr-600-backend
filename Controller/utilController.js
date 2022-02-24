@@ -1,5 +1,6 @@
 const fs = require("fs");
 const ProfileTemplateModel = require("../Model/ProfileTemplateModel");
+const VerificationModel = require("../Model/VerifictionModel");
 const SendEmail = require("../util/SendingEmail");
 
 exports.deleteUnUsedProfileTemplateImage = async (req, res, next) => {
@@ -45,7 +46,7 @@ exports.sendContactFormDataToMail = async (req, res, next) => {
         const { message, name, phone, email } = req.body;
         if (!message || !name || !phone || !email) return res.json({ error: "please Provide all Information" });
         const mailOption = {
-            to: "nazmul.w3@gmail.com",
+            to: "contact@server2.onecardpro.com",
             subject: "Mail From OneCardPro.Com Contact form",
             text: `Hy, I am ${name} \n
             my phone number is ${phone} \n 
@@ -56,6 +57,15 @@ exports.sendContactFormDataToMail = async (req, res, next) => {
 
         const sentEmail = await SendEmail.sendEmail(mailOption);
         res.send(sentEmail.accepted?.length > 0);
+    } catch (e) {
+        next(e);
+    }
+};
+
+exports.deleteVerificationData = async (req, res, next) => {
+    try {
+        await VerificationModel.findByIdAndDelete(req.params.id);
+        res.send(true);
     } catch (e) {
         next(e);
     }
