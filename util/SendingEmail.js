@@ -157,6 +157,7 @@ class SendEmail {
                         callback();
                     }
                     const hashedPassword = await bcrypt.hash(code, 5);
+                    console.log({hashedPassword})
                     const verification = new VerificationModel({ code: hashedPassword }).save();
                     resolve(verification);
                 } else {
@@ -171,11 +172,15 @@ class SendEmail {
     static async verifyCode(code, id) {
         if (code && id) {
             const data = await VerificationModel.findById(id);
+           
             if (!data) {
+                console.log("data not found")
                 return false;
             } else {
                 const isPasswordMatched = await bcrypt.compare(code, data?.code);
+                console.log("data found",data?.code)
                 if (isPasswordMatched && !data?.isUsed) {
+                    console.log("password matched")
                     return true;
                 } else {
                     return false;

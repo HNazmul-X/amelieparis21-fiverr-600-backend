@@ -48,10 +48,11 @@ exports.sendContactFormDataToMail = async (req, res, next) => {
         const mailOption = {
             to: "contact@server2.onecardpro.com",
             subject: "Mail From OneCardPro.Com Contact form",
-            text: `Hy, I am ${name} \n
-            my phone number is ${phone} \n 
-            And My email is ${email} \n
-           I sent this message for you that is  " ${message} "
+            text: `
+            Hy, I am ${name}
+            my phone number is ${phone} 
+            And My email is ${email}
+            I sent this message for you that is \n " ${message}"
             `,
         };
 

@@ -205,10 +205,12 @@ exports.verifyEmailCode = async (req, res, next) => {
     const { id, code } = req.body;
     try {
         const isCodeMatched = await SendEmail.verifyCode(code, id);
-        if (isCodeMatched && isCodeMatched !== "session expired") {
+        const file= "/public"
+        console.log(isCodeMatched)
+        if (isCodeMatched && isCodeMatched) {
             res.json({ success: "Verification Successfully", res: true });
         } else {
-            res.json({ error: "Cannot Verify the user" });
+            res.json({ error: "Invalid Code" });
         }
     } catch (e) {
         next(e);
