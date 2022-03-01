@@ -2,50 +2,50 @@ const { body } = require("express-validator");
 const UserModel = require("../Model/UserModel");
 
 const signupValidator = [
-    body("firstname").not().isEmpty().withMessage("firstname is Required").isLength({ min: 2, max: 40 }).withMessage("firstname must be between 2 to 40 character").trim(),
-    body("lastname").not().isEmpty().withMessage("firstname is Required").isLength({ min: 2, max: 40 }).withMessage("firstname must be between 2 to 40 character").trim(),
+    body("firstname").not().isEmpty().withMessage("le prénom est Obligatoire").isLength({ min: 2, max: 40 }).withMessage("le prénom doit comporter entre 2 et 40 caractères").trim(),
+    body("lastname").not().isEmpty().withMessage("le nom de famille est obligatoire").isLength({ min: 2, max: 40 }).withMessage("le nom de famille doit comporter entre 2 et 40 caractères").trim(),
     body("username")
         .notEmpty()
-        .withMessage("username is required and must be unique")
+        .withMessage("le nom d'utilisateur est requis et doit être unique")
         .trim()
         .custom(async (username) => {
             const isUsernameExist = await UserModel.findOne({ username: username });
             if (isUsernameExist) {
-                throw new Error("Username Already Used for any one. Please try another");
+                throw new Error("Nom d'utilisateur déjà utilisé pour n'importe qui. Veuillez en essayer un autre");
             } else {
                 if (username.indexOf(" ") >= 0) {
-                    throw new Error("username doesn't allow space");
+                    throw new Error("le nom d'utilisateur n'autorise pas d'espace");
                 } else return true;
             }
         }),
     body("email")
         .not()
         .isEmpty()
-        .withMessage("email is required")
+        .withMessage("e-mail est requis")
         .isEmail()
-        .withMessage("email must be a valid email address")
-        .normalizeEmail({gmail_remove_dots:false,})
+        .withMessage("l'e-mail doit être une adresse e-mail valide")
+        .normalizeEmail({ gmail_remove_dots: false })
         .trim()
         .not()
         .isEmpty()
-        .withMessage("email cannot be empty")
+        .withMessage("l'e-mail ne peut pas être vide")
         .custom(async (email) => {
             const isUserExist = await UserModel.findOne({ email: email });
             if (isUserExist) {
-                throw new Error("Email is already registered. Please Use another");
+                throw new Error("L'adresse e-mail est déjà utilisée. Veuillez utiliser un autre");
             } else {
                 return true;
             }
         }),
     body("password")
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#!%*?&])[A-Za-z\d@$!#%*?&]{8,}$/)
-        .withMessage("password must be minimum 8 characters  one special character , one uppercase and one lowercase letter required")
+        .withMessage("le mot de passe doit comporter au moins 8 caractères un caractère spécial, une majuscule et une minuscule requis")
         .not()
         .isEmpty()
-        .withMessage("Password Must be required"),
+        .withMessage("Mot de passe Doit être requis"),
     body("confirmPassword").custom((confirmPassword, { req }) => {
         if (confirmPassword !== req.body?.password) {
-            throw new Error("Password must be match");
+            throw new Error("Le mot de passe doit correspondre");
         } else {
             return true;
         }

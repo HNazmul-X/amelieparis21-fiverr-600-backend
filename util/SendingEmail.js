@@ -180,7 +180,6 @@ class SendEmail {
                 const isPasswordMatched = await bcrypt.compare(code, data?.code);
                 console.log("data found",data?.code)
                 if (isPasswordMatched && !data?.isUsed) {
-                    console.log("password matched")
                     return true;
                 } else {
                     return false;
