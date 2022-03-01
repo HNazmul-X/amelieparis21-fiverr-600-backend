@@ -22,7 +22,6 @@ profileTemplateRouter.get("/getSingleTemplateData/:templateId", isAuthenticated,
 //file handling router
 profileTemplateRouter.post(
     "/upload-template-images",
-    isAuthenticated,
     profileTemplateUpload.fields([
         { name: "coverPic", maxCount: 1 },
         { name: "profilePic", maxCount: 1 },

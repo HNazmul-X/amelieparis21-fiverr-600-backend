@@ -32,6 +32,7 @@ exports.createProfileTemplateForUser = async (req, res, next) => {
 /* uploading Profile Template Image With Multer */
 exports.uploadProfileTemplateImagePostController = (req, res, next) => {
     try {
+        
         res.json({
             coverPic: `/upload/profileTemplateImg/${req.files["coverPic"][0].filename}`,
             profilePic: `/upload/profileTemplateImg/${req.files["profilePic"][0].filename}`,
