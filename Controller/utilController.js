@@ -46,7 +46,7 @@ exports.sendContactFormDataToMail = async (req, res, next) => {
         const { message, name, phone, email } = req.body;
         if (!message || !name || !phone || !email) return res.json({ error: "please Provide all Information" });
         const mailOption = {
-            to: "contact@server2.onecardpro.com",
+            to: process.env.ADMIN_EMAIL,
             subject: "Mail From OneCardPro.Com Contact form",
             text: `
             Hy, I am ${name}

@@ -13,7 +13,7 @@ defaultMiddleware(app);
 //connecting to Database
 
 mongoose
-    .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cwbqb.mongodb.net/OneCardPro?retryWrites=true&w=majority`)
+    .connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@193.43.134.200:27017/One_Card_Pro`)
     .then(() => console.log(chalk.bgGreen.black("database Connection Successful" + `http://localhost:${PORT}`)));
 
 //connecting Router

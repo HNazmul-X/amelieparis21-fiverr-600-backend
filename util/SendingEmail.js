@@ -13,12 +13,12 @@ class SendEmail {
     static sendEmail(message) {
         return new Promise((resolve, reject) => {
             const transport = nodemailer.createTransport({
-                host: "server2.onecardpro.com",
+                host: "smtp.hostinger.com",
                 port: 465,
                 secure: true,
                 auth: {
-                    user: "mail@server2.onecardpro.com",
-                    pass: "s[,?@GX}mRUI$hQ+zQ",
+                    user: "mail@onecardpro.com",
+                    pass: "adYg2GUNMQ4bRAg%",
                 },
                 tls: {
                     rejectUnauthorized: false,
